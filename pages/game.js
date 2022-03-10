@@ -22,7 +22,7 @@ export default function GamePage() {
       grainId: unique_id,
       letter: key,
       state: {
-        hue: "slate-800",
+        hue: "yellow-400",
         modalStatus: "Sending",
         duration: null,
       },
@@ -50,13 +50,7 @@ export default function GamePage() {
         newGrain.state.modalStatus = "Finalized"
         newGrain.state.duration = Number(endTime - startTime)
         
-        for(let i = 0; i < blocks.length; i++) {
-          if(blocks[i].grainId === newGrain.grainId) {
-            blocks[i] = newGrain;
-          }
-        }
-
-        setBlocks(blocks)
+        
 
         console.log(newGrain)
       })
@@ -66,13 +60,7 @@ export default function GamePage() {
         newGrain.state.hue = "red-300";
         newGrain.state.modalStatus = "Failed";
 
-        for(let i = 0; i < blocks.length; i++) {
-          if(blocks[i].grainId === newGrain.grainId) {
-            blocks[i] = newGrain;
-          }
-        }
-
-        setBlocks(blocks)
+      
 
         console.log(error);
       });

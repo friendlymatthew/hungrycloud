@@ -1,51 +1,28 @@
-/**
- * 
- * @param {
-    <label
-      for={`modal-${props.grain_id}`}
-      className={`bg-${
-        statusHex[props.status]
-      }  cursor-pointer h-6 w-6 modal-button rounded-md m-1 hover:scale-105 transition ease-in duration-300`}
-    >
-      <input
-        type="checkbox"
-        id={`modal-${props.grain_id}`}
-        className="modal-toggle"
-      />
-      <label for={`modal-${props.grain_id}`} className="modal cursor-pointer">
-        <label className="modal-box rounded-none grid grid-cols-1 place-items-center">
-          <div className="text-2xl font-extrabold text-black">
-            Grain Information
-          </div>
-
-          <section className="my-4 py-4 w-8/12">
-            <div className="flex justify-between py-2 items-center text-black text-lg">
-              <div>grain_id</div>
-              <div>{props.grain_id}</div>
-            </div>
-            <div className="flex justify-between py-2 items-center text-black text-lg">
-              <div>pressed key</div>
-              <kbd className="kbd">{props.letter}</kbd>
-            </div>
-          </section>
-        </label>
-      </label>
-    </label>} props 
- * @returns 
- */
+import react, { useEffect, useState } from "react";
 
 export default function RiceComponent(props) {
-  const statusHex = {
-    0: "zinc-700",
-    1: "green-400",
-    2: "red-300",
-  };
+  const [ hue, setHue ] = useState("slate-800");
+
+  useEffect(() => {
+    console.log("hit")
+    if(props.grainState.modalStatus === "Finalized") {
+      console.log("hi")
+      setHue("green-300")
+    } 
+    console.log("seriously?")
+
+    if(props.grainState.modalStatus === "Failed") {
+      setHue("red-400")
+    }
+  })
+
+  
 
   return (
     <div>
       <label htmlFor={`modal-${props.grainId}`} className={`modal-button`}>
         <div
-          className={`h-6 w-6 bg-${props.grainState.hue} hover:opacity-80 transition ease-in duration-100 hover:scale-105 rounded-md m-1 cursor-pointer`}
+          className={`h-6 w-6 bg-${hue} border hover:border-orange hover:opacity-80 transition ease-in duration-100 hover:scale-105 rounded-md m-1 cursor-pointer`}
         ></div>
       </label>
 
