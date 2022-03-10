@@ -33,8 +33,8 @@ export default function RiceLogs(props) {
         <div className="flex-col-reverse">
           {props.blocks.map((block) => {
             return (
-              <div className="flex justify-between items-center">
-                <div key={block.grainId} className="w-full py-2 ">
+              <div  key={block.grainId} className="flex justify-between items-center">
+                <div className="w-full py-2 ">
                   {block.grainId}
                 </div>
                 {block.state.modalStatus === "Finalized" ? (
