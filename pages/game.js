@@ -40,7 +40,7 @@ export default function GamePage() {
 
     axios
       .post(
-        "https://3qgomlzo7e.execute-api.us-east-1.amazonaws.com/prod/grain",
+        "https://qc9pzikhia.execute-api.us-east-1.amazonaws.com/prod/grain",
         {
           grainId: unique_id,
           letter: String(key),
