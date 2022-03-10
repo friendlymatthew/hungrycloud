@@ -22,8 +22,8 @@ export default function Home() {
 
               <div className="text-xl italic font-medium">
                 <div>
-                  `&quot;`I like rice, rice is great when you`&apos;`re hungry
-                  and you want 2000 of something.`&quot;`
+                  &quot;I like rice, rice is great when you&apos;re hungry
+                  and you want 2000 of something.&quot;
                 </div>
                 <div className="mt-1">- Mitch Hedburg</div>
               </div>
