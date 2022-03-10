@@ -14,7 +14,7 @@ export default function RiceComponent(props) {
     if(props.grainState.modalStatus === "Failed") {
       setHue("red-400")
     }
-  })
+  }, [props.grainState.modalStatus])
 
   
 
