@@ -22,8 +22,8 @@ export default function RiceLogs(props) {
   }, [props.blocks]);
 
   return (
-    <div className="w-full bg-slate-600 py-4 text-white">
-      <div className="py-3  border-slate-800 border-b-2 font-extrabold text-xl text-white">
+    <div className="w-full bg-slate-600 pb-4 text-white">
+      <div className="py-3 flex items-center border-slate-800 border-b-2 font-extrabold text-2xl text-white">
         <div className="px-4">Server Logs</div>
       </div>
       <section
@@ -33,10 +33,11 @@ export default function RiceLogs(props) {
         <div className="flex-col-reverse">
           {props.blocks.map((block) => {
             return (
-              <div  key={block.grainId} className="flex justify-between items-center">
-                <div className="w-full py-2 ">
-                  {block.grainId}
-                </div>
+              <div
+                key={block.grainId}
+                className="flex justify-between items-center"
+              >
+                <div className="w-full py-2 ">{block.grainId}</div>
                 {block.state.modalStatus === "Finalized" ? (
                   <div className="bg-green-300 m-1 p-2 text-black font-extrabold">
                     {" "}
@@ -46,8 +47,9 @@ export default function RiceLogs(props) {
                   <div className="bg-red-400 font-extrabold"> ERR </div>
                 ) : (
                   <div className="bg-slate-800 m-1 p-2 text-white font-extrabold">
+                    {""}
+                    {block.letter}
                     {" "}
-                    lol{" "}
                   </div>
                 )}
               </div>

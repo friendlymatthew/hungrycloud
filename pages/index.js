@@ -47,7 +47,7 @@ export default function Home() {
                 </Link>
 
                 <a
-                  href="https://github.com/matthewkim0"
+                  href="https://github.com/matthewkim0/hungrycloud"
                   className="py-3 px-5 bg-[#fdff2d] hover:bg-[#45fec4] text-center text-xl font-medium"
                 >
                   Source

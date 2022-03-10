@@ -11,6 +11,10 @@ export default function GamePage() {
   const [start, setStart] = useState(false);
   const [blocks, setBlocks] = useState([]);
   const [pace, setPace] = useState([]);
+  const [maxSpeed, setMaxSpeed] = useState(Math.max(pace));
+  const [minSpeed, setMinSpeed] = useState(Math.min(pace));
+  const [ confirmed, setConfirmed ] = useState([]);
+  const [ rejected, setRejected ] = useState([]);
 
   const handleUserKeyPress = useCallback((event) => {
     let random = Math.floor(Math.random() * 100);
@@ -26,7 +30,6 @@ export default function GamePage() {
       state: {
         hue: "yellow-400",
         modalStatus: "Sending",
-        duration: null,
       },
     };
 
@@ -54,6 +57,19 @@ export default function GamePage() {
 
         setPace((pace) => [...pace, Number(endTime - startTime)]);
 
+        if (maxSpeed < Number(endTime - startTime)) {
+          setMaxSpeed(Number(endTime - startTime));
+        } else {
+          setMaxSpeed(maxSpeed)
+        }
+
+        if (minSpeed > Number(endTime - startTime)) {
+          setMinSpeed(Number(endTime - startTime));
+        } else {
+          setMinSpeed(minSpeed)
+        }
+        setConfirmed((confirmed) => [...confirmed, newGrain.grainId])
+
         console.log(newGrain);
       })
       .catch(function (error) {
@@ -62,11 +78,21 @@ export default function GamePage() {
         newGrain.state.hue = "red-300";
         newGrain.state.modalStatus = "Failed";
 
+        setRejected((rejected) => [...rejected, newGrain.grainId])
         console.log(error);
       });
 
+
     setStart(true);
   }, []);
+
+  const resetBlocks = () => {
+    setBlocks([])
+    setStart(false)
+    setPace([])
+    setConfirmed([])
+    setRejected([])
+  }
 
   useEffect(() => {
     window.addEventListener("keydown", handleUserKeyPress);
@@ -78,7 +104,10 @@ export default function GamePage() {
 
   return (
     <div className="bg-slate-800 min-h-screen scroll-smooth">
-      <NavBar />
+      <NavBar
+        blocks={blocks}
+        confirmed={confirmed}
+      />
 
       <section className="grid grid-cols-1 ">
         {start ? (
@@ -88,7 +117,14 @@ export default function GamePage() {
                 <ServerLogs blocks={blocks} />
               </section>
               <section className="col-span-2">
-                <Odometer blocks={blocks} pace={pace} />
+                <Odometer
+                  blocks={blocks}
+                  pace={pace}
+                  minSpeed={minSpeed}
+                  maxSpeed={maxSpeed}
+                  confirmed={confirmed}
+                  rejected={rejected}
+                />
               </section>
             </section>
           </section>
@@ -123,19 +159,19 @@ export default function GamePage() {
                   >
                     <li>
                       <div className="flex items-center">
-                        <div className="h-6 w-6 bg-black rounded-md"></div>
+                        <div className="h-6 w-6 bg-slate-800 rounded-md"></div>
                         <div>Pending Grain</div>
                       </div>
                     </li>
                     <li>
                       <div className="flex items-center">
-                        <div className="h-6 w-6 bg-green-400 rounded-md"></div>
+                        <div className="h-6 w-6 bg-green-300 rounded-md"></div>
                         <div>Confirmed Grain</div>
                       </div>
                     </li>
                     <li>
                       <div className="flex items-center">
-                        <div className="h-6 w-6 bg-red-500 rounded-md"></div>
+                        <div className="h-6 w-6 bg-red-400 rounded-md"></div>
                         <div>Failed Grain</div>
                       </div>
                     </li>
